@@ -245,7 +245,7 @@ class Component(TreeNode):
         super(Component, self).__init__(name=name, parent=parent,
                                         *args, **kwargs)
         self._set_events(['rtc_status', 'component_profile', 'ec_event',
-            'port_event', 'config_event', 'heartbeat'])
+            'port_event', 'config_event', 'heartbeat', 'fsm_event'])
         self._reset_data()
         self._parse_profile()
 
@@ -1214,10 +1214,14 @@ class Component(TreeNode):
         else:
             return self.CREATED
 
-    def _heartbeat(self):
-        # Received a heart beat
+    def _heartbeat(self, kind):
+        # Received a heart beat signal
         self._last_heartbeat = time.time()
-        self._call_cb('heartbeat', self._last_heartbeat)
+        self._call_cb('heartbeat', (kind, self._last_heartbeat))
+
+    def _fsm_event(self, kind, hint):
+        # Received a fsm event
+        self._call_cb('fsm_event', (kind, hint))
 
     def _parse_configuration(self):
         # Parse the component's configuration sets
