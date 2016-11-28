@@ -980,16 +980,6 @@ class Component(TreeNode):
     # Node functionality
 
     @property
-    def dynamic(self):
-        '''Is this component dynamic?'''
-        return self._dynamic
-
-    @dynamic.setter
-    def dynamic(self, enable):
-        '''Enable dynamic event handling mechanism of the component'''
-        return self._enable_dynamic(enable)
-
-    @property
     def heartbeat_time(self):
         '''The time of the last heartbeat.
 
