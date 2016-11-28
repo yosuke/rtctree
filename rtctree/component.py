@@ -67,9 +67,12 @@ class Component(TreeNode):
       one of Component.CFG_UPDATE_SET, Component.CFG_UPDATE_PARAM,
       Component.CFG_UPDATE_PARAM_IN_ACTIVE, Component.CFG_ADD_SET,
       Component.CFG_REMOVE_SET and Component.CFG_ACTIVATE_SET.
-    - heartbeat(time)
-      A heartbeat was received from the component. The time the beat was
-      received is passed.
+    - heartbeat(type, time)
+      A heartbeat was received from the component or from the execution context.
+      The time the beat was received is passed.
+    - fsm_event(type, hint)
+      A change in the FSM status has occurred. The type of the event and the
+      content of the event is passed.
 
     To explain the usage of Component node, we first launch example components:
     >>> import subprocess, shlex
@@ -961,6 +964,16 @@ class Component(TreeNode):
     # Node functionality
 
     @property
+    def dynamic(self):
+        '''Is this component dynamic?'''
+        return self._dynamic
+
+    @dynamic.setter
+    def dynamic(self, enable):
+        '''Enable dynamic event handling mechanism of the component'''
+        return self._enable_dynamic(enable)
+
+    @property
     def heartbeat_time(self):
         '''The time of the last heartbeat.
 
@@ -1135,6 +1148,10 @@ class Component(TreeNode):
             intf_type = obs._this()._NP_RepositoryId
             props = utils.dict_to_nvlist({'heartbeat.enable': 'YES',
                 'heartbeat.interval': '1.0',
+                'rtc_heartbeat.enable': 'YES',
+                'rtc_heartbeat.interval': '1.0',
+                'ec_heartbeat.enable': 'YES',
+                'ec_heartbeat.interval': '1.0',
                 'observed_status': 'ALL'})
             sprof = SDOPackage.ServiceProfile(id=uuid_val,
                     interface_type=intf_type, service=obs._this(),
