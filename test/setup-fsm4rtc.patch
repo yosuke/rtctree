@@ -1,0 +1,15 @@
+Index: OpenRTM-aist/src/lib/rtm/FsmActionListener.h
+===================================================================
+--- OpenRTM-aist/src/lib/rtm/FsmActionListener.h	(リビジョン 2806)
++++ OpenRTM-aist/src/lib/rtm/FsmActionListener.h	(作業コピー)
+@@ -29,9 +29,7 @@
+ 
+ namespace RTC
+ {
+-  struct FsmStructure
+-  {
+-  };
++  struct FsmStructure;
+   /*!
+    * @if jp
+    *
