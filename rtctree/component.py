@@ -54,7 +54,6 @@ class Component(TreeNode):
       One or more members of the component's profiles have been updated. The
       updated items are listed in the "items" argument.
     - ec_event(ec_handle, event)
-      A change in one of the attached execution contexts has occurred. The
       event is one of Component.EC_ATTACHED, Component.EC_DETACHED,
       Component.EC_RATE_CHANGED, Component.EC_STARTUP, and
       Component.EC_SHUTDOWN.
@@ -1170,6 +1169,8 @@ class Component(TreeNode):
                 self._obs_id = uuid_val
                 # If we could set an observer, the component is alive
                 self._last_heartbeat = time.time()
+            else:
+                raise exceptions.InvalidSdoServiceError('Observer')
         else: # Disable
             conf = self.object.get_configuration()
             res = conf.remove_service_profile(self._obs_id)
