@@ -1,12 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
-sudo apt install subversion autoconf autotool-bin libpoco-dev
-if [ ! -d "FSM4RTC" ]; then
-    svn co http://svn.openrtm.org/OpenRTM-aist/branches/FSM4RTC
+BASEDIR=$(dirname $(readlink -f "$0"))
+
+sudo apt install subversion autoconf autotools-bin libpoco-dev
+if [ ! -d "$BASEDIR/FSM4RTC" ]; then
+    svn co http://svn.openrtm.org/OpenRTM-aist/branches/FSM4RTC $BASEDIR/FSM4RTC
 fi
-cd FSM4RTC
+cd $BASEDIR/FSM4RTC
 svn update
-patch -p0 -E < ../test/setup-fsm4rtc.patch
+patch -p0 -E < $BASEDIR/setup-fsm4rtc.patch
 cd OpenRTM-aist
 ./autogen.sh 
 ./configure
