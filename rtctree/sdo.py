@@ -19,9 +19,10 @@ SDO client objects.
 
 
 from rtctree.rtc import OpenRTM__POA
+from rtctree.rtc import RTC__POA
 
 
-class RTCObserver(OpenRTM__POA.ComponentObserver):
+class RTCObserver(RTC__POA.ComponentObserver):
     def __init__(self, target):
         self._tgt = target
 

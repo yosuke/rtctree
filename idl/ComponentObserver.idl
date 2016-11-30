@@ -19,6 +19,8 @@
 #include "SDOPackage.idl"
 #include "RTC.idl"
 
+#pragma prefix "omg.org"
+
 /*!
  * @if jp
  * @brief コンポーネント状態オブザーバインターフェース
@@ -43,7 +45,7 @@
  * @since 1.1
  * @endif
  */
-module OpenRTM
+module RTC
 {
   /*!
    * @if jp

@@ -1021,7 +1021,7 @@ class Component(TreeNode):
 
         '''
         with self._mutex:
-            obs = rtctree.sdo.RTCLogger(self, cb)
+            obs = sdo.RTCLogger(self, cb)
             uuid_val = uuid.uuid4()
             intf_type = obs._this()._NP_RepositoryId
             props = {'logger.log_level': level,
@@ -1149,7 +1149,7 @@ class Component(TreeNode):
 
     def _enable_dynamic(self, enable=True):
         if enable:
-            obs = rtctree.sdo.RTCObserver(self)
+            obs = sdo.RTCObserver(self)
             uuid_val = uuid.uuid4().get_bytes()
             intf_type = obs._this()._NP_RepositoryId
             props = utils.dict_to_nvlist({'heartbeat.enable': 'YES',
