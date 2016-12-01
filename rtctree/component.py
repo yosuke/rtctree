@@ -54,6 +54,7 @@ class Component(TreeNode):
       One or more members of the component's profiles have been updated. The
       updated items are listed in the "items" argument.
     - ec_event(ec_handle, event)
+      A change in one of the attached execution contexts has occurred. The
       event is one of Component.EC_ATTACHED, Component.EC_DETACHED,
       Component.EC_RATE_CHANGED, Component.EC_STARTUP, and
       Component.EC_SHUTDOWN.
